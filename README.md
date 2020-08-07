@@ -4,8 +4,8 @@ Social Authority SDK
 Social Authority helps you find, optimize, and engage your Twitter audience. It's a 1 to 100 point scale that measures a user's influential content on Twitter.
 More than just another self-focused metric, Social Authority helps you discover other influential tweeters with high engagement. You can read more about it at [https://followerwonk.com/social-authority](https://followerwonk.com/social-authority)
 
-* [Code Examples](https://github.com/seomoz/Social-Authority-SDK/tree/master/code-examples)
-* [Language Libraries](https://github.com/seomoz/Social-Authority-SDK/tree/master/client-libraries)
+* [Code Examples](https://github.com/followerwonk/Social-Authority-SDK/tree/master/code-examples)
+* [Language Libraries](https://github.com/followerwonk/Social-Authority-SDK/tree/master/client-libraries)
 
 ## Getting Started with the Social Authority API
 
@@ -28,18 +28,18 @@ The current default freemium request limits are 250 SAs per day & 7500 SAs per m
         10 requests per hour
         10 requests per day
 
-Please contact us (help@moz.com) for paid subscription access for larger volumes.
+Please contact us (help@followerwonk.com) for paid subscription access for larger volumes.
 
 ### Querying the Social Authority API
 
 Once you have an AccessID you can make a call to the Social Authority resource. The Social Authority resource takes a list of screen names or user ids and returns Social Authority scores for all of the accounts it can find. Currently we limit the number of screen names and user ids in a single request to 25 combined.
 
-You will need to perform a signed request as described in [Anatomy of a Social Authority Call](https://github.com/seomoz/Social-Authority-SDK/blob/master/docs/Anatomy-of-a-Social-Authority-API-Call.md).
+You will need to perform a signed request as described in [Anatomy of a Social Authority Call](https://github.com/followerwonk/Social-Authority-SDK/blob/master/docs/Anatomy-of-a-Social-Authority-API-Call.md).
 
     curl -v https://api.followerwonk.com/social-authority?screen_name=randfish;AccessID=ACCESS_ID;Timestamp=TIMESTAMP;Signature=SIGNATURE_HMAC
 
 You'll get back a JSON packet with the Social Authority score and some metrics.
- 
+
         {
            "_embedded" : [
               {
@@ -74,9 +74,9 @@ You'll get back a JSON packet with the Social Authority score and some metrics.
 
 ## Attribution and Licensing
 
-By using the Social Authority API, you agree to our [General Terms of Use](http://www.seomoz.org/users/terms), our [Privacy Policy](http://www.seomoz.org/pages/privacy) and the restrictions contained on this page. You do not have to be a paying member to use our API. Access to the Social Authority API may be suspended or terminated at any time and for any reason, with or without cause. If your access to the API is cancelled, you are not to be entitled to a refund of any kind. SEOmoz may discontinue providing service at any time and for any reason. We simply ask that if you re-use our data you give us attribution and follow our branding guidelines.
+By using the Social Authority API, you agree to our [General Terms of Use](http://followerwonk.com/terms-of-use), our [Privacy Policy](https://followerwonk.com/privacy-policy) and the restrictions contained on this page. You do not have to be a paying member to use our API. Access to the Social Authority API may be suspended or terminated at any time and for any reason, with or without cause. If your access to the API is cancelled, you are not to be entitled to a refund of any kind. Followerwonk may discontinue providing service at any time and for any reason. We simply ask that if you re-use our data you give us attribution and follow our branding guidelines.
 
-## Help 
+## Help
 
-Problems? Concerns? Questions? [Contact us!](http://www.seomoz.org/help)
+Problems? Concerns? Questions? [Contact us!](email:help@followerwonk.com)
 
