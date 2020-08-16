@@ -15,11 +15,11 @@ GetOptions(
 
 die "Must supply --id and --key" unless $id && $key;
 
-my $time      = time + 500;
-my $signature = hmac_sha1_hex( "$id\n$time", $key );
-my $auth      = "AccessID=$id;Timestamp=$time;Signature=$signature";
+my $now       = time;
+my $signature = hmac_sha1_hex( "$id\n$now", $key );
+my $auth      = "AccessID=$id;Timestamp=$now;Signature=$signature";
 
 while ( my $names = join ',', splice @ARGV, 0, 99 ) {
     say http( GET "$uri?screen_name=$names",
-        Authorization => "MozSigned $auth" )->as_json->response->dump;
+        Authorization => "WonkSigned $auth" )->as_json->response->dump;
 }

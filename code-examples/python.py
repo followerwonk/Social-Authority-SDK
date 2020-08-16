@@ -35,7 +35,7 @@ class FollowerWonk(object):
     def social_authority(username):
         uri = 'https://api.followerwonk.com/social-authority'
 
-        datime = int(time() + 500)
+        datime = int(time())
 
         keyBin = follower_wonk_secret_key_str.encode('UTF-8')
         messageStr = "%s\n%s" % (follower_wonk_access_id_str, datime)

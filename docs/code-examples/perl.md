@@ -23,14 +23,14 @@ Querying the Social Authority API is really quite simple. Here's an expanded exa
 
 	die "Must supply --id and --key" unless $id && $key;
 
-	my $time = time + 500;
-	my $signature = hmac_sha1_hex("$id\n$time", $key);
-	my $auth = "AccessID=$id;Timestamp=$time;Signature=$signature";
+	my $now = time;
+	my $signature = hmac_sha1_hex("$id\n$now", $key);
+	my $auth = "AccessID=$id;Timestamp=$now;Signature=$signature";
 
 	while ( my $names = join ',', splice @ARGV, 0,99 ) {
-	    say http( 
-	    	GET "$uri?screen_name=$names", 
-	    	     Authorization => "MozSigned $auth" 
+	    say http(
+	    	GET "$uri?screen_name=$names",
+	    	     Authorization => "WonkSigned $auth"
 	    )->as_json->response->dump;
 	}
 
@@ -48,30 +48,30 @@ We're stating that we'd like to use Perl 5.12.1. This version of Perl is the fir
 Next we bring in the external libraries we would like to use. There are three:
 
 	use HTTP::Thin::UserAgent;
-	use Getopt::Long; 
+	use Getopt::Long;
 	use Digest::HMAC_SHA1 qw(hmac_sha1_hex);
- 
+
 
 [`HTTP::Thin::UserAgent`][1] is a small HTTP client that makes doing API style requests easier. [`Getopt::Long`][2] is a standard command line argument parser, and it ships with the core Perl distribution. Finally [`Digest::HMAC_SHA1`][3] is what we'll use to sign our requests.
 
 Continuing on:
 
 	die "Must supply --id and --key" unless $id && $key;
- 
+
 If we don't have the information we need to sign the requests we throw an exception telling the user that they need to supply the required arguments.
 
 Next we set up our authentication credentials:
 
-	my $time = time + 500;
-	my $signature = hmac_sha1_hex("$id\n$time", $key);
-	my $auth = "AccessID=$id;Timestamp=$time;Signature=$signature";
+	my $now = time;
+	my $signature = hmac_sha1_hex("$id\n$now", $key);
+	my $auth = "AccessID=$id;Timestamp=$now;Signature=$signature";
 
 Then for batches of 100 names provided on the command line, we make the API request:
 
 	while ( my $names = join ',', splice @ARGV, 0,99 ) {
-	    say http( 
-	    	GET "$uri?screen_name=$names", 
-	    	     Authorization => "MozSigned $auth" 
+	    say http(
+	    	GET "$uri?screen_name=$names",
+	    	     Authorization => "MozSigned $auth"
 	    )->as_json->response->dump;
 	}
 

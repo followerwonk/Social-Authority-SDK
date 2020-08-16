@@ -1,12 +1,12 @@
 # Anatomy of a Social Authority API Call
 
-Every request to the Social Authority API follows the same basic format: 
+Every request to the Social Authority API follows the same basic format:
 
     http://api.followerwonk.com/social-authority?{screen_name};{user_id};{AccessID};{Timestamp};{Signature}
 
 Here's what each of these parts of this request do:
 
-* `http://api.followerwonk.com`	
+* `http://api.followerwonk.com`
 Access the API by calling the hostname of the service `api.followerwonk.com` and the Resource you’re making the request to `/social-authority`.
 
 * {screen_name} & {user_id}
@@ -21,9 +21,9 @@ These are query parameters that provide your credentials. For example:
 
 To use signed authentication, append the following three query string parameters:
 
-The AccessID parameter identifies the client in question. The value of this parameter must be your access ID, obtained when you generate yourAPI credentials.
-The Timestamp parameter is a Unix timestamp that indicates for how long this request is valid. This should be a time in the future, usually no more than several minutes later than the moment your client code initiates the transfer. Values that expire excessively far in the future will not be honored by the Mozscape API. Authentication timestamps must be in UTC in order to work properly.
-The Signature parameter is an HMAC-SHA1 hash of your Access ID (as it appears in the AccessID parameter), followed by a new line, followed by the Timestamp parameter, using your Secret Key. This hash must be base64 and URL-encoded before being placed in the request query string.
+The AccessID parameter identifies the client in question. The value of this parameter must be your access ID, obtained when you generate your API credentials.
+The Timestamp parameter is a Unix timestamp and indicates when the request was signed. This should be the current time. Values that are significantly from the current time will not be honored by the Social Authority API. Authentication timestamps must be in UTC in order to work properly.
+The Signature parameter is an HMAC-SHA1 hash of your Access ID (as it appears in the AccessID parameter), followed by a new line, followed by the Timestamp parameter, using your Secret Key. This hash must be Base64 and URL-encoded before being placed in the request query string.
 Once combined, a valid query string should look like the following:
 
 `AccessID=member-MDczMjM1NGUtN2Y3Ny01OGI0LThkOGUtYzhlYWVlYjcxMTZk;Timestamp=1225138899;Signature=LmXYcPqc%2BkapNKzHzYz2BI4SXfC%3D`
@@ -32,11 +32,11 @@ For example, the example request above should compute the HMAC-SHA1 of the follo
 
 `member-MDczMjM1NGUtN2Y3Ny01OGI0LThkOGUtYzhlYWVlYjcxMTZk <newline> 1225138899`
 
-Once the HMAC-SHA1 of this string is created, the binary form must be base64 encoded. The result of the base64 encoding must be URL-encoded. This method of authentication is complicated, but you can find helpful examples in several languages in our Sample Code.
+Once the HMAC-SHA1 of this string is created, the binary form must be Base64 encoded. The result of the Base64 encoding must be URL-encoded. This method of authentication is complicated, but you can find helpful examples in several languages in our Sample Code.
 
 ## ? and ;
 
-These little characters are important, so don’t miss them. The ? separates the main URL from the query parameters, and the ; goes between multiple parameters. You’ll see the ; used in the example for authentication, which is just 3 parameters required by the service.
+These little characters are important, so don't miss them. The ? separates the main URL from the query parameters, and the ; goes between multiple parameters. You’ll see the ; used in the example for authentication, which is just 3 parameters required by the service.
 All of these elements together give you a valid request:
 
     http://api.followerwonk.com/social-authority?screen_name=randfish;AccessID=member-MDczMjM1NGUtN2Y3Ny01OGI0LThkOGUtYzhlYWVlYjcxMTZk;Timestamp=1225138898;Signature=LmXYcPqc%2BkapNKzHzYz2BI4SXfC%3D
